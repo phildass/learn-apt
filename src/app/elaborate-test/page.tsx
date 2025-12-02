@@ -374,6 +374,20 @@ export default function ElaborateTestPage() {
     
     sessionStorage.setItem("learnapt-results", JSON.stringify(resultsData));
     
+    // Also save to localStorage for admin history
+    try {
+      const historyStr = localStorage.getItem("learnapt-assessment-history");
+      const history = historyStr ? JSON.parse(historyStr) : [];
+      history.unshift({
+        id: `elaborate-${Date.now()}`,
+        ...resultsData,
+      });
+      // Keep only last 100 assessments
+      localStorage.setItem("learnapt-assessment-history", JSON.stringify(history.slice(0, 100)));
+    } catch (e) {
+      console.error("Failed to save assessment history:", e);
+    }
+    
     // Short delay to show analyzing state, then navigate
     setTimeout(() => {
       router.push("/results");
