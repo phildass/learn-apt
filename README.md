@@ -1,4 +1,4 @@
-# Learnapt-next
+# learn-apt
 
 **Learn Your Aptitude** - A comprehensive aptitude testing platform that helps users discover their learning preferences, problem-solving styles, and motivation drivers.
 
