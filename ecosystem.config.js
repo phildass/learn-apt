@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'learnapt-next',
+      name: 'learn-apt',
       script: 'npm',
       args: 'start',
       instances: 'max',

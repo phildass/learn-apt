@@ -1,5 +1,5 @@
 {
-  "name": "learnapt-next",
+  "name": "learn-apt",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
-    "next": "16.0.6",
+    "next": "^16.1.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -20,7 +20,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.6",
+    "eslint-config-next": "^16.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

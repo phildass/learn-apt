@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'learnapt.iiskills.in',
+        hostname: 'learn-apt.iiskills.cloud',
       },
     ],
   },

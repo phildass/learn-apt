@@ -28,8 +28,8 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/phildass/Learnapt-next.git
-cd Learnapt-next
+git clone https://github.com/phildass/learn-apt.git
+cd learn-apt
 ```
 
 2. Install dependencies:
@@ -44,41 +44,90 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deployment to Vercel
+## Deployment
 
-### Option 1: One-Click Deploy
+### Deployment to Subdomain (learn-apt.iiskills.cloud)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/phildass/Learnapt-next)
+This application is configured to run on the exclusive subdomain `learn-apt.iiskills.cloud`. Follow these steps for deployment:
 
-### Option 2: Manual Deployment
+#### Option 1: Deploy to Vercel (Recommended)
 
-1. Install Vercel CLI:
-```bash
-npm i -g vercel
-```
+1. **One-Click Deploy**
 
-2. Login to Vercel:
-```bash
-vercel login
-```
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/phildass/learn-apt)
 
-3. Deploy:
-```bash
-vercel --prod
-```
+2. **Or Deploy via Vercel CLI**
+
+   ```bash
+   # Install Vercel CLI
+   npm i -g vercel
+   
+   # Login to Vercel
+   vercel login
+   
+   # Deploy to production
+   vercel --prod
+   ```
+
+3. **Configure Custom Subdomain**
+
+   After deployment:
+   - Go to your Vercel project settings
+   - Navigate to "Domains"
+   - Add `learn-apt.iiskills.cloud`
+   - Update your DNS records as instructed by Vercel
+
+#### Option 2: Deploy to Your Own Server
+
+1. **Build the application**
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+2. **Start the production server**
+
+   ```bash
+   npm start
+   ```
+
+   Or use PM2 for process management:
+
+   ```bash
+   npm install -g pm2
+   pm2 start ecosystem.config.js
+   ```
+
+3. **Configure Nginx (if applicable)**
+
+   Example Nginx configuration for the subdomain:
+
+   ```nginx
+   server {
+       listen 80;
+       server_name learn-apt.iiskills.cloud;
+
+       location / {
+           proxy_pass http://localhost:3000;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+
+4. **Enable HTTPS with Let's Encrypt**
+
+   ```bash
+   sudo certbot --nginx -d learn-apt.iiskills.cloud
+   ```
 
 ### Environment Variables
 
-No environment variables are required for basic deployment.
-
-### Custom Domain Setup
-
-After deployment, configure your custom domain `learnapt.iiskills.in`:
-
-1. Go to your Vercel project settings
-2. Navigate to "Domains"
-3. Add `learnapt.iiskills.in`
-4. Update your DNS records as instructed by Vercel
+No environment variables are required for basic deployment. The application is pre-configured for the `learn-apt.iiskills.cloud` subdomain.
 
 ## Available Scripts
 
