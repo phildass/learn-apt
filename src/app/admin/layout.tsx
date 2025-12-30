@@ -9,16 +9,16 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    // Redirect to admin login if not authenticated
-    if (!isAuthenticated && pathname !== "/admin") {
+    // Only redirect once loading is complete and user is not authenticated
+    if (!isLoading && !isAuthenticated && pathname !== "/admin") {
       router.push("/admin");
     }
-  }, [isAuthenticated, pathname, router]);
+  }, [isAuthenticated, isLoading, pathname, router]);
 
   return <>{children}</>;
 }

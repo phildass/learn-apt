@@ -11,6 +11,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// NOTE: This is a demo implementation with a hardcoded password for simplicity.
+// In a production environment, implement server-side authentication with:
+// - Environment variables for secrets
+// - Secure API endpoints for login/logout
+// - HTTP-only cookies for session management
+// - JWT tokens or session tokens
 const ADMIN_PASSWORD = "phil123";
 const AUTH_STORAGE_KEY = "learnapt-admin-auth";
 
