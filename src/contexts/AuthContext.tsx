@@ -16,13 +16,16 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // NOTE: This is a demo implementation with a hardcoded password for simplicity.
-// In a production environment, implement server-side authentication with:
-// - Environment variables for secrets (use process.env.ADMIN_PASSWORD)
-// - Secure API endpoints for login/logout
-// - HTTP-only cookies for session management
-// - JWT tokens or session tokens
-// - Always use Supabase or another production-ready auth solution
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "phil123";
+// ⚠️ WARNING: In production, ALWAYS use Supabase or another server-side auth solution.
+// The fallback password mode is inherently insecure because:
+// - The password must be accessible on the client-side for comparison
+// - This exposes the password in the browser bundle
+// - There's no protection against brute force attacks
+// For production deployments:
+// - Configure Supabase authentication (recommended)
+// - Or implement proper server-side authentication with API routes
+// - Never rely on client-side password comparison in production
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "phil123";
 const AUTH_STORAGE_KEY = "learnapt-admin-auth";
 
 // Helper function to set auth cookie with appropriate security flags
@@ -51,6 +54,12 @@ function clearAuthCookie() {
   ].filter(Boolean).join("; ");
   
   document.cookie = cookieOptions;
+}
+
+// Helper function to get auth cookie value
+function getAuthCookie(): boolean {
+  const cookieAuth = document.cookie.split("; ").find(row => row.startsWith("learnapt-admin-auth="));
+  return cookieAuth?.split("=")[1] === "true";
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -105,8 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Fallback to cookie-based auth (legacy)
         try {
           const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
-          const cookieAuth = document.cookie.split("; ").find(row => row.startsWith("learnapt-admin-auth="));
-          const hasCookie = cookieAuth?.split("=")[1] === "true";
+          const hasCookie = getAuthCookie();
           
           const isAuth = storedAuth === "true" || hasCookie;
           setIsAuthenticated(isAuth);
