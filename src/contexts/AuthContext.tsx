@@ -28,8 +28,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const loadAuth = () => {
       try {
+        // Check both sessionStorage and cookie for authentication
         const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
-        setIsAuthenticated(storedAuth === "true");
+        const cookieAuth = document.cookie.split("; ").find(row => row.startsWith("learnapt-admin-auth="));
+        const hasCookie = cookieAuth?.split("=")[1] === "true";
+        
+        // User is authenticated if either sessionStorage or cookie indicates so
+        const isAuth = storedAuth === "true" || hasCookie;
+        setIsAuthenticated(isAuth);
+        
+        // Sync sessionStorage with cookie state
+        if (isAuth && storedAuth !== "true") {
+          sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        }
       } catch (error) {
         console.error("Failed to load authentication state:", error);
         setIsAuthenticated(false);
@@ -45,6 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         setIsAuthenticated(true);
         sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        // Set a cookie for server-side middleware to check
+        document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
         return true;
       } catch (error) {
         console.error("Failed to save authentication state:", error);
@@ -59,6 +72,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setIsAuthenticated(false);
       sessionStorage.removeItem(AUTH_STORAGE_KEY);
+      // Clear the auth cookie
+      document.cookie = "learnapt-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
     } catch (error) {
       console.error("Failed to clear authentication state:", error);
     }
