@@ -129,7 +129,19 @@ This application is configured to run on the exclusive subdomain `learn-apt.iisk
 
 ### Environment Variables
 
-No environment variables are required for basic deployment. The application is pre-configured for the `learn-apt.iiskills.cloud` subdomain.
+The application requires Supabase configuration for authentication:
+
+1. **Create `.env.local` file**:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. **Configure Supabase credentials**:
+   - Get credentials from the main iiskills-cloud Supabase project
+   - Update `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - See [SUPABASE_INTEGRATION.md](./SUPABASE_INTEGRATION.md) for detailed setup instructions
+
+3. **Important**: Use the **SAME** Supabase project as the main iiskills-cloud repository to enable cross-subdomain authentication.
 
 ## Available Scripts
 
