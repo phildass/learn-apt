@@ -27,25 +27,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Load authentication state from sessionStorage on mount (client-side only)
   useEffect(() => {
     const loadAuth = () => {
-      const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
-      setIsAuthenticated(storedAuth === "true");
-      setIsLoading(false);
+      try {
+        const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
+        setIsAuthenticated(storedAuth === "true");
+      } catch (error) {
+        console.error("Failed to load authentication state:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadAuth();
   }, []);
 
   const login = (password: string): boolean => {
     if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
-      return true;
+      try {
+        setIsAuthenticated(true);
+        sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        return true;
+      } catch (error) {
+        console.error("Failed to save authentication state:", error);
+        setIsAuthenticated(false);
+        return false;
+      }
     }
     return false;
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
-    sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    try {
+      setIsAuthenticated(false);
+      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    } catch (error) {
+      console.error("Failed to clear authentication state:", error);
+    }
   };
 
   return (

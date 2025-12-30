@@ -20,5 +20,10 @@ export default function AdminLayout({
     }
   }, [isAuthenticated, isLoading, pathname, router]);
 
+  // Block content while loading or redirecting
+  if (isLoading || (!isAuthenticated && pathname !== "/admin")) {
+    return null;
+  }
+
   return <>{children}</>;
 }
