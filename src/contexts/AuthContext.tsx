@@ -139,10 +139,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
-          // Check if error is due to unconfirmed email
-          if (error.message.toLowerCase().includes('email not confirmed') || 
-              error.message.toLowerCase().includes('verify') ||
-              error.message.toLowerCase().includes('confirmation')) {
+          // Provide user-friendly error messages for common authentication issues
+          // Note: String matching is defensive - Supabase should provide consistent error messages
+          const errorMsg = error.message.toLowerCase();
+          if (errorMsg.includes('email not confirmed') || 
+              errorMsg.includes('verify') ||
+              errorMsg.includes('confirmation')) {
             return { 
               success: false, 
               error: "Please confirm your email address before logging in. Check your inbox for the confirmation link." 

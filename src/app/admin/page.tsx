@@ -108,12 +108,8 @@ export default function AdminPage() {
     
     const result = await register(email, password);
     if (result.success) {
-      if (result.error) {
-        // Success with a message (e.g., email confirmation needed)
-        setSuccessMessage(result.error);
-      } else {
-        setSuccessMessage("Registration successful! You can now log in.");
-      }
+      // Show the appropriate message based on whether email confirmation is needed
+      setSuccessMessage(result.error || "Registration successful!");
       setEmail("");
       setPassword("");
       // Switch back to login mode after successful registration

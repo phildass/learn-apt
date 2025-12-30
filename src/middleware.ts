@@ -29,9 +29,10 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(url);
       }
       
-      // Verify email is confirmed (additional security check)
-      // Note: Supabase auth.getUser() should only return confirmed users when email confirmation is enabled
-      // But we add an extra check here for safety
+      // Verify email is confirmed (additional security layer)
+      // Note: When Supabase email confirmation is properly configured, auth.getUser() 
+      // should only return users with confirmed emails. This check provides defense-in-depth
+      // for cases where email confirmation is enforced at the project level.
       if (user.email_confirmed_at === null && user.confirmed_at === null) {
         // User hasn't confirmed their email - redirect to login
         if (pathname === "/admin") {
