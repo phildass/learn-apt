@@ -15,13 +15,20 @@ export default function AdminLayout({
 
   useEffect(() => {
     // Only redirect once loading is complete and user is not authenticated
-    if (!isLoading && !isAuthenticated && pathname !== "/admin") {
+    // Redirect to /admin login page if trying to access any admin route without auth
+    if (!isLoading && !isAuthenticated) {
       router.push("/admin");
     }
-  }, [isAuthenticated, isLoading, pathname, router]);
+  }, [isAuthenticated, isLoading, router]);
 
-  // Block content while loading or redirecting
-  if (isLoading || (!isAuthenticated && pathname !== "/admin")) {
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return null;
+  }
+
+  // The /admin page itself will show the login form when not authenticated
+  // All other admin routes require authentication
+  if (!isAuthenticated && pathname !== "/admin") {
     return null;
   }
 
