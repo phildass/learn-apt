@@ -18,6 +18,7 @@ import {
   Zap,
   BookOpen,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Types for assessment data
 interface AssessmentRecord {
@@ -36,11 +37,8 @@ interface AssessmentRecord {
   }[];
 }
 
-// Simple password for admin access
-const ADMIN_PASSWORD = "phil123";
-
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, login, logout } = useAuth();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [assessments, setAssessments] = useState<AssessmentRecord[]>([]);
@@ -86,16 +84,17 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
+    const success = login(password);
+    if (success) {
       setError("");
+      setPassword("");
     } else {
       setError("Invalid password. Please try again.");
     }
   };
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    logout();
     setPassword("");
     setSelectedAssessment(null);
   };
