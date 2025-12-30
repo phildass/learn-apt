@@ -30,9 +30,11 @@ export async function middleware(request: NextRequest) {
       }
       
       // User is authenticated via Supabase - set compatibility cookie
+      const isProduction = process.env.NODE_ENV === "production";
       response.cookies.set("learnapt-admin-auth", "true", {
         path: "/",
         sameSite: "strict",
+        secure: isProduction,
       });
       
       return response;

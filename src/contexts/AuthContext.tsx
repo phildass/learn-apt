@@ -17,12 +17,41 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // NOTE: This is a demo implementation with a hardcoded password for simplicity.
 // In a production environment, implement server-side authentication with:
-// - Environment variables for secrets
+// - Environment variables for secrets (use process.env.ADMIN_PASSWORD)
 // - Secure API endpoints for login/logout
 // - HTTP-only cookies for session management
 // - JWT tokens or session tokens
-const ADMIN_PASSWORD = "phil123";
+// - Always use Supabase or another production-ready auth solution
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "phil123";
 const AUTH_STORAGE_KEY = "learnapt-admin-auth";
+
+// Helper function to set auth cookie with appropriate security flags
+function setAuthCookie(value: string) {
+  const isProduction = process.env.NODE_ENV === "production";
+  const cookieOptions = [
+    `learnapt-admin-auth=${value}`,
+    "path=/",
+    "SameSite=Strict",
+    // Add Secure flag in production to ensure HTTPS-only transmission
+    isProduction ? "Secure" : "",
+  ].filter(Boolean).join("; ");
+  
+  document.cookie = cookieOptions;
+}
+
+// Helper function to clear auth cookie
+function clearAuthCookie() {
+  const isProduction = process.env.NODE_ENV === "production";
+  const cookieOptions = [
+    "learnapt-admin-auth=",
+    "path=/",
+    "expires=Thu, 01 Jan 1970 00:00:00 GMT",
+    "SameSite=Strict",
+    isProduction ? "Secure" : "",
+  ].filter(Boolean).join("; ");
+  
+  document.cookie = cookieOptions;
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,7 +76,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setIsAuthenticated(true);
             setUserEmail(session.user.email || null);
             // Set cookie for middleware compatibility
-            document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
+            setAuthCookie("true");
           } else {
             setIsAuthenticated(false);
             setUserEmail(null);
@@ -62,11 +91,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (session) {
             setIsAuthenticated(true);
             setUserEmail(session.user.email || null);
-            document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
+            setAuthCookie("true");
           } else {
             setIsAuthenticated(false);
             setUserEmail(null);
-            document.cookie = "learnapt-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
+            clearAuthCookie();
           }
         });
 
@@ -113,7 +142,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setIsAuthenticated(true);
           setUserEmail(data.session.user.email || null);
           // Set cookie for middleware compatibility
-          document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
+          setAuthCookie("true");
           return { success: true };
         }
 
@@ -129,7 +158,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
           setIsAuthenticated(true);
           sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
-          document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
+          setAuthCookie("true");
           return { success: true };
         } catch (error) {
           console.error("Failed to save authentication state:", error);
@@ -164,7 +193,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (data.session) {
             setIsAuthenticated(true);
             setUserEmail(data.session.user.email || null);
-            document.cookie = "learnapt-admin-auth=true; path=/; SameSite=Strict";
+            setAuthCookie("true");
             return { success: true };
           }
           
@@ -188,7 +217,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await supabase.auth.signOut();
         setIsAuthenticated(false);
         setUserEmail(null);
-        document.cookie = "learnapt-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
+        clearAuthCookie();
       } catch (error) {
         console.error("Logout error:", error);
       }
@@ -196,7 +225,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         setIsAuthenticated(false);
         sessionStorage.removeItem(AUTH_STORAGE_KEY);
-        document.cookie = "learnapt-admin-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
+        clearAuthCookie();
       } catch (error) {
         console.error("Failed to clear authentication state:", error);
       }
