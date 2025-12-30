@@ -1,71 +1,123 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { supabase, getCurrentUser, signInWithEmail, signOutUser, isAdmin } from "@/lib/supabaseClient";
+import type { User } from "@supabase/supabase-js";
 
 interface AuthContextType {
+  user: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
-  login: (password: string) => boolean;
-  logout: () => void;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// NOTE: This is a demo implementation with a hardcoded password for simplicity.
-// In a production environment, implement server-side authentication with:
-// - Environment variables for secrets
-// - Secure API endpoints for login/logout
-// - HTTP-only cookies for session management
-// - JWT tokens or session tokens
-const ADMIN_PASSWORD = "phil123";
-const AUTH_STORAGE_KEY = "learnapt-admin-auth";
-
+/**
+ * AuthProvider - Provides authentication state using Supabase
+ * 
+ * This replaces the previous hardcoded password implementation with proper
+ * Supabase authentication. It supports:
+ * - Email/password authentication
+ * - Session persistence
+ * - Admin role detection
+ * - Cross-subdomain authentication (when configured)
+ * 
+ * Usage: Wrap your app with <AuthProvider> in layout.tsx
+ */
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load authentication state from sessionStorage on mount (client-side only)
+  // Load authentication state from Supabase on mount
   useEffect(() => {
-    const loadAuth = () => {
+    const loadAuth = async () => {
       try {
-        const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
-        setIsAuthenticated(storedAuth === "true");
+        const currentUser = await getCurrentUser();
+        setUser(currentUser);
       } catch (error) {
         console.error("Failed to load authentication state:", error);
-        setIsAuthenticated(false);
+        setUser(null);
       } finally {
         setIsLoading(false);
       }
     };
+
     loadAuth();
+
+    // Listen for auth state changes (login, logout, token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state changed:', event);
+        setUser(session?.user || null);
+        setIsLoading(false);
+      }
+    );
+
+    // Cleanup subscription on unmount
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const login = (password: string): boolean => {
-    if (password === ADMIN_PASSWORD) {
-      try {
-        setIsAuthenticated(true);
-        sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
-        return true;
-      } catch (error) {
-        console.error("Failed to save authentication state:", error);
-        setIsAuthenticated(false);
-        return false;
+  /**
+   * Login with email and password via Supabase
+   * 
+   * @param email - User's email address
+   * @param password - User's password  
+   * @returns Promise with success status and optional error message
+   */
+  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsLoading(true);
+      const { user: loggedInUser, error } = await signInWithEmail(email, password);
+      
+      if (error) {
+        return { success: false, error };
       }
+
+      if (loggedInUser) {
+        setUser(loggedInUser);
+        return { success: true };
+      }
+
+      return { success: false, error: "Login failed" };
+    } catch (error) {
+      console.error("Login error:", error);
+      return { success: false, error: "An unexpected error occurred" };
+    } finally {
+      setIsLoading(false);
     }
-    return false;
   };
 
-  const logout = () => {
+  /**
+   * Logout the current user via Supabase
+   */
+  const logout = async () => {
     try {
-      setIsAuthenticated(false);
-      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+      setIsLoading(true);
+      await signOutUser();
+      setUser(null);
     } catch (error) {
-      console.error("Failed to clear authentication state:", error);
+      console.error("Logout error:", error);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    isAdmin: user ? isAdmin(user) : false,
+    isLoading,
+    login,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

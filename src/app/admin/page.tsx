@@ -40,6 +40,7 @@ interface AssessmentRecord {
 
 export default function AdminPage() {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [assessments, setAssessments] = useState<AssessmentRecord[]>([]);
@@ -83,20 +84,23 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(password);
-    if (success) {
-      setError("");
+    setError("");
+    
+    const result = await login(email, password);
+    if (result.success) {
       setPassword("");
+      setEmail("");
     } else {
-      setError("Invalid password. Please try again.");
+      setError(result.error || "Invalid credentials. Please try again.");
     }
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     setPassword("");
+    setEmail("");
     setSelectedAssessment(null);
   };
 
@@ -212,11 +216,27 @@ export default function AdminPage() {
               </div>
               <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Login</h1>
               <p className="text-slate-600 dark:text-slate-400 mt-2">
-                Enter password to access the admin panel
+                Enter your email and password to access the admin panel
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Enter your email"
+                  required
+                  autoFocus
+                />
+              </div>
+
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Password
@@ -227,8 +247,8 @@ export default function AdminPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter admin password"
-                  autoFocus
+                  placeholder="Enter your password"
+                  required
                 />
               </div>
 
@@ -238,9 +258,10 @@ export default function AdminPage() {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                disabled={isLoading}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
               >
-                Login
+                {isLoading ? "Signing in..." : "Sign In"}
               </button>
             </form>
 
