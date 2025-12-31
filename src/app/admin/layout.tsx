@@ -9,17 +9,23 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isAdmin, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    // Only redirect once loading is complete and user is not authenticated
-    // Redirect to /admin login page if trying to access any admin route without auth
-    if (!isLoading && !isAuthenticated) {
-      router.push("/admin");
+    // Only redirect once loading is complete
+    if (!isLoading) {
+      // If not authenticated, redirect to /admin login page
+      if (!isAuthenticated) {
+        router.push("/admin");
+      }
+      // If authenticated but not an admin, redirect to home with error
+      else if (!isAdmin) {
+        router.push("/?error=unauthorized");
+      }
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [isAuthenticated, isAdmin, isLoading, router]);
 
   // Show loading state while checking authentication
   if (isLoading) {
@@ -27,8 +33,13 @@ export default function AdminLayout({
   }
 
   // The /admin page itself will show the login form when not authenticated
-  // All other admin routes require authentication
+  // All other admin routes require authentication AND admin role
   if (!isAuthenticated && pathname !== "/admin") {
+    return null;
+  }
+
+  // If authenticated but not admin, don't render admin content
+  if (isAuthenticated && !isAdmin && pathname !== "/admin") {
     return null;
   }
 

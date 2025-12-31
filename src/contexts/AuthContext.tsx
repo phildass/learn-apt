@@ -238,8 +238,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Helper: Admin detection (customize if you use Supabase roles)
-  const isAdmin = user ? (user.email?.endsWith("@your-admin-domain.com") ?? false) : false;
+  // Helper: Admin detection - checks user_metadata.is_admin
+  const isAdmin = user ? (user.user_metadata?.is_admin === true) : false;
 
   const value: AuthContextType = {
     user,

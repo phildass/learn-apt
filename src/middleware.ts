@@ -43,7 +43,20 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(url);
       }
       
-      // User is authenticated via Supabase - set compatibility cookie
+      // Check if user has admin role - CRITICAL SECURITY CHECK
+      // Only users with user_metadata.is_admin === true can access admin routes
+      const isAdmin = user.user_metadata?.is_admin === true;
+      
+      if (!isAdmin) {
+        // User is authenticated but not an admin
+        // Redirect to home page with unauthorized message
+        const url = request.nextUrl.clone();
+        url.pathname = "/";
+        url.searchParams.set("error", "unauthorized");
+        return NextResponse.redirect(url);
+      }
+      
+      // User is authenticated and is an admin - set compatibility cookie
       const isProduction = process.env.NODE_ENV === "production";
       response.cookies.set("learnapt-admin-auth", "true", {
         path: "/",

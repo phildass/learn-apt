@@ -39,7 +39,7 @@ interface AssessmentRecord {
 }
 
 export default function AdminPage() {
-  const { isAuthenticated, isLoading, login, register, logout, useSupabase, userEmail } = useAuth();
+  const { isAuthenticated, isAdmin, isLoading, login, register, logout, useSupabase, userEmail } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -322,6 +322,51 @@ export default function AdminPage() {
               <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm inline-flex items-center gap-1">
                 <Home className="h-4 w-4" />
                 Back to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Authenticated but not admin - show access denied
+  if (isAuthenticated && !isAdmin) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900/50 rounded-full mb-4">
+                <Lock className="h-8 w-8 text-red-600" />
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+                Access Denied
+              </h1>
+              <p className="text-slate-600 dark:text-slate-400 mt-2">
+                You do not have administrator privileges.
+              </p>
+              {userEmail && (
+                <p className="text-sm text-slate-500 dark:text-slate-500 mt-2">
+                  Signed in as: {userEmail}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              <button
+                onClick={handleLogout}
+                className="w-full bg-slate-600 hover:bg-slate-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <LogOut className="h-5 w-5" />
+                Sign Out
+              </button>
+              <Link
+                href="/"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <Home className="h-5 w-5" />
+                Return to Home
               </Link>
             </div>
           </div>
