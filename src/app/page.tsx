@@ -1,9 +1,52 @@
+"use client";
+
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { BookOpen, Zap, Brain, Target, Clock, CheckCircle } from "lucide-react";
+import { BookOpen, Zap, Brain, Target, Clock, CheckCircle, AlertCircle, X } from "lucide-react";
+
+function UnauthorizedBanner() {
+  const searchParams = useSearchParams();
+  const [dismissed, setDismissed] = useState(false);
+
+  // Derive whether to show the banner from searchParams and dismissed state
+  const showUnauthorized = searchParams.get("error") === "unauthorized" && !dismissed;
+
+  if (!showUnauthorized) return null;
+
+  return (
+    <div className="bg-red-50 dark:bg-red-900/20 border-b-2 border-red-500 dark:border-red-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-red-800 dark:text-red-200 font-medium">Access Denied</p>
+              <p className="text-red-700 dark:text-red-300 text-sm">
+                You do not have administrator privileges. Admin access requires user_metadata.is_admin to be set to true.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setDismissed(true)}
+            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      {/* Unauthorized Error Banner */}
+      <Suspense fallback={null}>
+        <UnauthorizedBanner />
+      </Suspense>
+
       {/* Header */}
       <header className="border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
