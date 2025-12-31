@@ -22,12 +22,14 @@ export async function createClient(request: NextRequest) {
         return request.cookies.getAll();
       },
       setAll(cookiesToSet) {
+        // First update request cookies (doesn't accept options parameter)
         cookiesToSet.forEach(({ name, value }) =>
           request.cookies.set(name, value)
         );
         supabaseResponse = NextResponse.next({
           request,
         });
+        // Then update response cookies (with options for proper configuration)
         cookiesToSet.forEach(({ name, value, options }) =>
           supabaseResponse.cookies.set(name, value, options)
         );
