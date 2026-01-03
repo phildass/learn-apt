@@ -865,7 +865,7 @@ const modules: Module[] = [
       },
       {
         id: "alr8",
-        text: "If CAT = 24, DOG = 26, what does BAT equal?",
+        text: "If CAT = 24, DOG = 26, what does BAT equal? (Hint: Sum the position values of letters)",
         options: [
           { value: "a", label: "A) 22" },
           { value: "b", label: "B) 23" },
@@ -1717,7 +1717,7 @@ const modules: Module[] = [
       },
       {
         id: "di6",
-        text: "A table shows: Q1 revenue ₹50L, Q2 ₹60L, Q3 ₹55L, Q4 ₹65L. What is the average quarterly revenue?",
+        text: "A table shows: Q1 revenue ₹50 lakhs, Q2 ₹60 lakhs, Q3 ₹55 lakhs, Q4 ₹65 lakhs. What is the average quarterly revenue?",
         options: [
           { value: "a", label: "A) ₹55 lakhs" },
           { value: "b", label: "B) ₹57.5 lakhs" },
