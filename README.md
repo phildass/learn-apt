@@ -4,16 +4,35 @@
 
 ## Features
 
-- **Elaborate Test**: In-depth assessment covering multiple modules with comprehensive questions
+- **Elaborate Test**: Comprehensive assessment with **20 modules and 200 questions total** (10 questions per module)
+  
+  **Learning & Cognitive Assessment:**
   - Learning Styles Assessment
   - Cognitive Patterns
   - Problem-Solving Approach
   - Motivation & Drive
   - Learning Environment Preferences
+  
+  **Aptitude & Reasoning:**
   - Numerical & Data Reasoning (with 5 options including "I don't know")
   - Quantitative Aptitude (with 5 options including "I don't know")
   - Abstract & Logical Reasoning (with 5 options including "I don't know")
   - Spatial & Visual Reasoning (with 5 options including "I don't know")
+  - Verbal Reasoning & Comprehension
+  
+  **Professional Skills:**
+  - Critical Thinking
+  - Time Management & Organization
+  - Communication Preferences
+  - Decision Making
+  - Attention to Detail
+  
+  **Personal Effectiveness:**
+  - Data Interpretation
+  - Stress Management & Resilience
+  - Creativity & Innovation
+  - Memory & Retention
+  - Collaborative Learning Styles
   
 - **Brief Test**: Quick assessment with five key modules:
   - Learning Preferences
