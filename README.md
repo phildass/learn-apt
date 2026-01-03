@@ -23,6 +23,13 @@
   - Abstract & Logical Reasoning (with 5 options including "I don't know")
 
 **Note**: Mathematical, quantitative, logical, spatial, and mechanical reasoning questions include a fifth option "E) I don't know" to allow test-takers to skip questions they're uncertain about. All currency references use ₹ (Rupee) or Rs instead of $ for localization.
+- **Brief Test**: Quick assessment with four key modules:
+  - Learning Preferences
+  - Problem-Solving Style
+  - Motivation Drivers
+  - Numerical Reasoning
+- **Indian Context**: All monetary examples use Indian Rupee (₹) for relevance to Indian users
+- **Comprehensive Assessment**: Includes both personality and quantitative aptitude questions
 
 ## Tech Stack
 

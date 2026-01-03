@@ -383,6 +383,19 @@ const modules: Module[] = [
           { value: "c", label: "C) 8" },
           { value: "d", label: "D) 9" },
           { value: "e", label: "E) I don't know" },
+
+    id: "quantitative-aptitude",
+    title: "Quantitative Aptitude",
+    description: "Evaluate your numerical reasoning and problem-solving abilities with practical examples.",
+    questions: [
+      {
+        id: "qa1",
+        text: "A vendor sells mangoes at ₹60 per kg and makes a profit of 20%. What was the cost price per kg?",
+        options: [
+          { value: "45", label: "₹45" },
+          { value: "48", label: "₹48" },
+          { value: "50", label: "₹50" },
+          { value: "55", label: "₹55" },
         ],
       },
       {
@@ -394,6 +407,12 @@ const modules: Module[] = [
           { value: "c", label: "C) 288 sq cm" },
           { value: "d", label: "D) 312 sq cm" },
           { value: "e", label: "E) I don't know" },
+        text: "If a laptop costs ₹45,000 after a 10% discount, what was the original price?",
+        options: [
+          { value: "50000", label: "₹50,000" },
+          { value: "49500", label: "₹49,500" },
+          { value: "48000", label: "₹48,000" },
+          { value: "51000", label: "₹51,000" },
         ],
       },
       {
@@ -405,6 +424,12 @@ const modules: Module[] = [
           { value: "c", label: "C) 286" },
           { value: "d", label: "D) 306" },
           { value: "e", label: "E) I don't know" },
+        text: "A person saves ₹1,200 per month. If they want to buy a phone worth ₹18,000, how many months of savings are needed?",
+        options: [
+          { value: "15", label: "15 months" },
+          { value: "12", label: "12 months" },
+          { value: "18", label: "18 months" },
+          { value: "10", label: "10 months" },
         ],
       },
       {
@@ -416,6 +441,12 @@ const modules: Module[] = [
           { value: "c", label: "C) 54 km/h" },
           { value: "d", label: "D) 58 km/h" },
           { value: "e", label: "E) I don't know" },
+        text: "Three friends share a restaurant bill of ₹2,400 in the ratio 2:3:3. How much does the first person pay?",
+        options: [
+          { value: "600", label: "₹600" },
+          { value: "800", label: "₹800" },
+          { value: "900", label: "₹900" },
+          { value: "750", label: "₹750" },
         ],
       },
       {
@@ -551,6 +582,12 @@ const modules: Module[] = [
           { value: "c", label: "C) 8" },
           { value: "d", label: "D) 12" },
           { value: "e", label: "E) I don't know" },
+        text: "A shopkeeper marks up an item by 25% and then offers a 10% discount. If the cost price is ₹800, what is the selling price?",
+        options: [
+          { value: "900", label: "₹900" },
+          { value: "850", label: "₹850" },
+          { value: "920", label: "₹920" },
+          { value: "880", label: "₹880" },
         ],
       },
     ],

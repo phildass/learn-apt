@@ -123,15 +123,15 @@ export default function Home() {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Clock className="h-5 w-5 text-blue-600" />
-                  <span>~5 minutes to complete</span>
+                  <span>~7 minutes to complete</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <CheckCircle className="h-5 w-5 text-blue-600" />
-                  <span>3 key modules</span>
+                  <span>4 key modules</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Target className="h-5 w-5 text-blue-600" />
-                  <span>9 focused questions</span>
+                  <span>12 focused questions</span>
                 </li>
               </ul>
               <div className="mb-4">
@@ -145,6 +145,9 @@ export default function Home() {
                   </span>
                   <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-sm">
                     Motivation Drivers
+                  </span>
+                  <span className="px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 rounded-full text-sm">
+                    Numerical Reasoning
                   </span>
                 </div>
               </div>
@@ -173,15 +176,15 @@ export default function Home() {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Clock className="h-5 w-5 text-purple-600" />
-                  <span>~15-20 minutes to complete</span>
+                  <span>~20-25 minutes to complete</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <CheckCircle className="h-5 w-5 text-purple-600" />
-                  <span>Multiple comprehensive modules</span>
+                  <span>6 comprehensive modules</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Target className="h-5 w-5 text-purple-600" />
-                  <span>Detailed question sets</span>
+                  <span>30 detailed questions</span>
                 </li>
               </ul>
               <div className="mb-4">
@@ -195,6 +198,9 @@ export default function Home() {
                   </span>
                   <span className="px-3 py-1 bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 rounded-full text-sm">
                     Behavioral Insights
+                  </span>
+                  <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 rounded-full text-sm">
+                    Quantitative Skills
                   </span>
                 </div>
               </div>
