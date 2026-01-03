@@ -133,6 +133,86 @@ const modules: Module[] = [
       },
     ],
   },
+  {
+    id: "numerical-reasoning",
+    title: "Numerical & Data Reasoning",
+    description: "Test your ability to work with numbers, data, and calculations.",
+    questions: [
+      {
+        id: "nr1",
+        text: "A product costs ₹850 and is discounted by 15%. What is the final price?",
+        options: [
+          { value: "a", label: "A) ₹722.50" },
+          { value: "b", label: "B) ₹735.00" },
+          { value: "c", label: "C) ₹765.00" },
+          { value: "d", label: "D) ₹800.00" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "nr2",
+        text: "If a train travels 240 km in 3 hours, what is its average speed in km/h?",
+        options: [
+          { value: "a", label: "A) 70 km/h" },
+          { value: "b", label: "B) 75 km/h" },
+          { value: "c", label: "C) 80 km/h" },
+          { value: "d", label: "D) 85 km/h" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "nr3",
+        text: "A company's revenue increased from ₹5,00,000 to ₹6,50,000. What is the percentage increase?",
+        options: [
+          { value: "a", label: "A) 20%" },
+          { value: "b", label: "B) 25%" },
+          { value: "c", label: "C) 30%" },
+          { value: "d", label: "D) 35%" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "logical-reasoning",
+    title: "Abstract & Logical Reasoning",
+    description: "Evaluate your ability to identify patterns and think logically.",
+    questions: [
+      {
+        id: "lr1",
+        text: "Which number comes next in the sequence: 2, 6, 12, 20, 30, ?",
+        options: [
+          { value: "a", label: "A) 38" },
+          { value: "b", label: "B) 40" },
+          { value: "c", label: "C) 42" },
+          { value: "d", label: "D) 44" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "lr2",
+        text: "All managers are leaders. Some leaders are innovators. Which conclusion is valid?",
+        options: [
+          { value: "a", label: "A) All managers are innovators" },
+          { value: "b", label: "B) Some managers may be innovators" },
+          { value: "c", label: "C) No managers are innovators" },
+          { value: "d", label: "D) All innovators are managers" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "lr3",
+        text: "If A is taller than B, and B is taller than C, which statement must be true?",
+        options: [
+          { value: "a", label: "A) C is the shortest" },
+          { value: "b", label: "B) A is the tallest among the three" },
+          { value: "c", label: "C) Both A and B are correct" },
+          { value: "d", label: "D) Neither can be determined" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
 ];
 
 export default function BriefTestPage() {

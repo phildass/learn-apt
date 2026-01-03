@@ -307,6 +307,254 @@ const modules: Module[] = [
       },
     ],
   },
+  {
+    id: "numerical-data-reasoning",
+    title: "Numerical & Data Reasoning",
+    description: "Comprehensive evaluation of numerical aptitude and data interpretation skills.",
+    questions: [
+      {
+        id: "ndr1",
+        text: "A shopkeeper sells an item for ₹1,350 after giving a 10% discount. What was the original price?",
+        options: [
+          { value: "a", label: "A) ₹1,450" },
+          { value: "b", label: "B) ₹1,485" },
+          { value: "c", label: "C) ₹1,500" },
+          { value: "d", label: "D) ₹1,550" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "ndr2",
+        text: "If 5 workers can complete a task in 12 days, how many days will 8 workers take at the same rate?",
+        options: [
+          { value: "a", label: "A) 6.5 days" },
+          { value: "b", label: "B) 7 days" },
+          { value: "c", label: "C) 7.5 days" },
+          { value: "d", label: "D) 8 days" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "ndr3",
+        text: "A tank is 3/4 full. After using 30 liters, it becomes 1/2 full. What is the tank's capacity?",
+        options: [
+          { value: "a", label: "A) 100 liters" },
+          { value: "b", label: "B) 120 liters" },
+          { value: "c", label: "C) 140 liters" },
+          { value: "d", label: "D) 150 liters" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "ndr4",
+        text: "A person invests Rs 25,000 at 8% simple interest per annum. What is the interest after 3 years?",
+        options: [
+          { value: "a", label: "A) Rs 5,000" },
+          { value: "b", label: "B) Rs 5,500" },
+          { value: "c", label: "C) Rs 6,000" },
+          { value: "d", label: "D) Rs 6,500" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "ndr5",
+        text: "What is the average of the following numbers: 42, 58, 73, 61, 51?",
+        options: [
+          { value: "a", label: "A) 55" },
+          { value: "b", label: "B) 57" },
+          { value: "c", label: "C) 59" },
+          { value: "d", label: "D) 61" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "quantitative-aptitude",
+    title: "Quantitative Aptitude",
+    description: "Advanced quantitative problem-solving and mathematical reasoning.",
+    questions: [
+      {
+        id: "qa1",
+        text: "If x + y = 12 and x - y = 4, what is the value of x?",
+        options: [
+          { value: "a", label: "A) 6" },
+          { value: "b", label: "B) 7" },
+          { value: "c", label: "C) 8" },
+          { value: "d", label: "D) 9" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "qa2",
+        text: "A rectangle's length is twice its width. If the perimeter is 72 cm, what is the area?",
+        options: [
+          { value: "a", label: "A) 240 sq cm" },
+          { value: "b", label: "B) 264 sq cm" },
+          { value: "c", label: "C) 288 sq cm" },
+          { value: "d", label: "D) 312 sq cm" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "qa3",
+        text: "What is 15% of 840 plus 25% of 560?",
+        options: [
+          { value: "a", label: "A) 246" },
+          { value: "b", label: "B) 266" },
+          { value: "c", label: "C) 286" },
+          { value: "d", label: "D) 306" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "qa4",
+        text: "A train 120 meters long passes a pole in 8 seconds. What is its speed in km/h?",
+        options: [
+          { value: "a", label: "A) 48 km/h" },
+          { value: "b", label: "B) 52 km/h" },
+          { value: "c", label: "C) 54 km/h" },
+          { value: "d", label: "D) 58 km/h" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "qa5",
+        text: "If the cost price of 12 items equals the selling price of 10 items, what is the profit percentage?",
+        options: [
+          { value: "a", label: "A) 15%" },
+          { value: "b", label: "B) 20%" },
+          { value: "c", label: "C) 25%" },
+          { value: "d", label: "D) 30%" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "abstract-logical-reasoning",
+    title: "Abstract & Logical Reasoning",
+    description: "Advanced pattern recognition, logical deduction, and analytical thinking.",
+    questions: [
+      {
+        id: "alr1",
+        text: "Complete the series: 3, 9, 27, 81, ?",
+        options: [
+          { value: "a", label: "A) 162" },
+          { value: "b", label: "B) 216" },
+          { value: "c", label: "C) 243" },
+          { value: "d", label: "D) 324" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "alr2",
+        text: "If all roses are flowers and some flowers are red, which conclusion is certain?",
+        options: [
+          { value: "a", label: "A) All roses are red" },
+          { value: "b", label: "B) Some roses are red" },
+          { value: "c", label: "C) All red things are roses" },
+          { value: "d", label: "D) None of these is certain" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "alr3",
+        text: "What comes next in the pattern: Z, Y, X, W, V, ?",
+        options: [
+          { value: "a", label: "A) T" },
+          { value: "b", label: "B) U" },
+          { value: "c", label: "C) S" },
+          { value: "d", label: "D) R" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "alr4",
+        text: "If CODE is written as FRGH, how is MIND written?",
+        options: [
+          { value: "a", label: "A) NLQG" },
+          { value: "b", label: "B) PLQG" },
+          { value: "c", label: "C) MIND" },
+          { value: "d", label: "D) OKPI" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "alr5",
+        text: "What is the next number in the sequence: 2, 5, 11, 23, 47, ?",
+        options: [
+          { value: "a", label: "A) 89" },
+          { value: "b", label: "B) 91" },
+          { value: "c", label: "C) 93" },
+          { value: "d", label: "D) 95" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "spatial-visual-reasoning",
+    title: "Spatial & Visual Reasoning",
+    description: "Assess spatial awareness, visual pattern recognition, and mechanical aptitude.",
+    questions: [
+      {
+        id: "svr1",
+        text: "A cube is painted red on all faces and then cut into 27 smaller equal cubes. How many cubes have exactly one face painted?",
+        options: [
+          { value: "a", label: "A) 4" },
+          { value: "b", label: "B) 6" },
+          { value: "c", label: "C) 8" },
+          { value: "d", label: "D) 12" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "svr2",
+        text: "If you fold a square paper in half twice and make one cut, how many holes will appear when unfolded?",
+        options: [
+          { value: "a", label: "A) 2 holes" },
+          { value: "b", label: "B) 4 holes" },
+          { value: "c", label: "C) 6 holes" },
+          { value: "d", label: "D) 8 holes" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "svr3",
+        text: "Looking at a clock mirror reflection showing 3:40, what is the actual time?",
+        options: [
+          { value: "a", label: "A) 8:20" },
+          { value: "b", label: "B) 8:40" },
+          { value: "c", label: "C) 9:20" },
+          { value: "d", label: "D) 9:40" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "svr4",
+        text: "A gear with 20 teeth rotates clockwise. A connected gear with 40 teeth will rotate:",
+        options: [
+          { value: "a", label: "A) Clockwise at half speed" },
+          { value: "b", label: "B) Counter-clockwise at half speed" },
+          { value: "c", label: "C) Clockwise at double speed" },
+          { value: "d", label: "D) Counter-clockwise at double speed" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+      {
+        id: "svr5",
+        text: "How many faces does a rectangular prism (cuboid) have?",
+        options: [
+          { value: "a", label: "A) 4" },
+          { value: "b", label: "B) 6" },
+          { value: "c", label: "C) 8" },
+          { value: "d", label: "D) 12" },
+          { value: "e", label: "E) I don't know" },
+        ],
+      },
+    ],
+  },
 ];
 
 export default function ElaborateTestPage() {
