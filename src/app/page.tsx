@@ -176,15 +176,15 @@ export default function Home() {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Clock className="h-5 w-5 text-purple-600" />
-                  <span>~20-25 minutes to complete</span>
+                  <span>~40-50 minutes to complete</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <CheckCircle className="h-5 w-5 text-purple-600" />
-                  <span>6 comprehensive modules</span>
+                  <span>20 comprehensive modules</span>
                 </li>
                 <li className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                   <Target className="h-5 w-5 text-purple-600" />
-                  <span>30 detailed questions</span>
+                  <span>200 detailed questions</span>
                 </li>
               </ul>
               <div className="mb-4">
