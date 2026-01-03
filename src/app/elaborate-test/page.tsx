@@ -372,20 +372,6 @@ const modules: Module[] = [
   {
     id: "quantitative-aptitude",
     title: "Quantitative Aptitude",
-    description: "Advanced quantitative problem-solving and mathematical reasoning.",
-    questions: [
-      {
-        id: "qa1",
-        text: "If x + y = 12 and x - y = 4, what is the value of x?",
-        options: [
-          { value: "a", label: "A) 6" },
-          { value: "b", label: "B) 7" },
-          { value: "c", label: "C) 8" },
-          { value: "d", label: "D) 9" },
-          { value: "e", label: "E) I don't know" },
-
-    id: "quantitative-aptitude",
-    title: "Quantitative Aptitude",
     description: "Evaluate your numerical reasoning and problem-solving abilities with practical examples.",
     questions: [
       {
@@ -400,13 +386,6 @@ const modules: Module[] = [
       },
       {
         id: "qa2",
-        text: "A rectangle's length is twice its width. If the perimeter is 72 cm, what is the area?",
-        options: [
-          { value: "a", label: "A) 240 sq cm" },
-          { value: "b", label: "B) 264 sq cm" },
-          { value: "c", label: "C) 288 sq cm" },
-          { value: "d", label: "D) 312 sq cm" },
-          { value: "e", label: "E) I don't know" },
         text: "If a laptop costs ₹45,000 after a 10% discount, what was the original price?",
         options: [
           { value: "50000", label: "₹50,000" },
@@ -417,13 +396,6 @@ const modules: Module[] = [
       },
       {
         id: "qa3",
-        text: "What is 15% of 840 plus 25% of 560?",
-        options: [
-          { value: "a", label: "A) 246" },
-          { value: "b", label: "B) 266" },
-          { value: "c", label: "C) 286" },
-          { value: "d", label: "D) 306" },
-          { value: "e", label: "E) I don't know" },
         text: "A person saves ₹1,200 per month. If they want to buy a phone worth ₹18,000, how many months of savings are needed?",
         options: [
           { value: "15", label: "15 months" },
@@ -434,13 +406,6 @@ const modules: Module[] = [
       },
       {
         id: "qa4",
-        text: "A train 120 meters long passes a pole in 8 seconds. What is its speed in km/h?",
-        options: [
-          { value: "a", label: "A) 48 km/h" },
-          { value: "b", label: "B) 52 km/h" },
-          { value: "c", label: "C) 54 km/h" },
-          { value: "d", label: "D) 58 km/h" },
-          { value: "e", label: "E) I don't know" },
         text: "Three friends share a restaurant bill of ₹2,400 in the ratio 2:3:3. How much does the first person pay?",
         options: [
           { value: "600", label: "₹600" },
@@ -451,13 +416,12 @@ const modules: Module[] = [
       },
       {
         id: "qa5",
-        text: "If the cost price of 12 items equals the selling price of 10 items, what is the profit percentage?",
+        text: "A shopkeeper marks up an item by 25% and then offers a 10% discount. If the cost price is ₹800, what is the selling price?",
         options: [
-          { value: "a", label: "A) 15%" },
-          { value: "b", label: "B) 20%" },
-          { value: "c", label: "C) 25%" },
-          { value: "d", label: "D) 30%" },
-          { value: "e", label: "E) I don't know" },
+          { value: "900", label: "₹900" },
+          { value: "850", label: "₹850" },
+          { value: "920", label: "₹920" },
+          { value: "880", label: "₹880" },
         ],
       },
     ],
@@ -582,12 +546,6 @@ const modules: Module[] = [
           { value: "c", label: "C) 8" },
           { value: "d", label: "D) 12" },
           { value: "e", label: "E) I don't know" },
-        text: "A shopkeeper marks up an item by 25% and then offers a 10% discount. If the cost price is ₹800, what is the selling price?",
-        options: [
-          { value: "900", label: "₹900" },
-          { value: "850", label: "₹850" },
-          { value: "920", label: "₹920" },
-          { value: "880", label: "₹880" },
         ],
       },
     ],
