@@ -146,6 +146,7 @@ const modules: Module[] = [
           { value: "20", label: "20%" },
           { value: "25", label: "25%" },
           { value: "30", label: "30%" },
+          { value: "idk", label: "I don't know" },
         ],
       },
       {
@@ -156,6 +157,7 @@ const modules: Module[] = [
           { value: "2000", label: "₹2,000" },
           { value: "2100", label: "₹2,100" },
           { value: "2250", label: "₹2,250" },
+          { value: "idk", label: "I don't know" },
         ],
       },
       {
@@ -166,6 +168,7 @@ const modules: Module[] = [
           { value: "1800", label: "₹1,800" },
           { value: "2000", label: "₹2,000" },
           { value: "1200", label: "₹1,200" },
+          { value: "idk", label: "I don't know" },
         ],
       },
     ],
@@ -178,9 +181,10 @@ export default function BriefTestPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const currentModule = modules[currentModuleIndex];
-  const currentQuestion = currentModule.questions[currentQuestionIndex];
+  const currentQuestion = currentModule?.questions[currentQuestionIndex];
   const totalQuestions = modules.reduce((acc, m) => acc + m.questions.length, 0);
   
   const answeredCount = useMemo(() => Object.keys(answers).length, [answers]);
@@ -188,7 +192,7 @@ export default function BriefTestPage() {
   
   const isFirstQuestion = currentModuleIndex === 0 && currentQuestionIndex === 0;
   const isLastQuestion = currentModuleIndex === modules.length - 1 && 
-    currentQuestionIndex === currentModule.questions.length - 1;
+    currentQuestionIndex === currentModule?.questions.length - 1;
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
@@ -204,6 +208,17 @@ export default function BriefTestPage() {
       ...prev,
       [currentQuestion.id]: value,
     }));
+    
+    // Check if this is the last question
+    const isLast = currentModuleIndex === modules.length - 1 && 
+      currentQuestionIndex === currentModule.questions.length - 1;
+    
+    if (isLast) {
+      setTimeout(() => {
+        setIsCompleted(true);
+      }, 300);
+      return;
+    }
     
     // Auto-advance to next question after a brief delay for better UX
     setTimeout(() => {
@@ -267,7 +282,15 @@ export default function BriefTestPage() {
     }, 1500);
   }, [answers, router]);
 
-  const currentAnswer = answers[currentQuestion.id];
+  const handleRetake = useCallback(() => {
+    setCurrentModuleIndex(0);
+    setCurrentQuestionIndex(0);
+    setAnswers({});
+    setIsCompleted(false);
+    setIsAnalyzing(false);
+  }, []);
+
+  const currentAnswer = answers[currentQuestion?.id];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -285,7 +308,27 @@ export default function BriefTestPage() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
-        {isAnalyzing ? (
+        {isCompleted ? (
+          <div className="text-center py-20">
+            <div className="mb-6">
+              <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="h-10 w-10 text-blue-600" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              Test is completed. Please wait for your results.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-8">
+              You have successfully completed the brief test.
+            </p>
+            <button
+              onClick={handleRetake}
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+            >
+              Retake Test
+            </button>
+          </div>
+        ) : isAnalyzing ? (
           <div className="text-center py-20">
             <Loader2 className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">

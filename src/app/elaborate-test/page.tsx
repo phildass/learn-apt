@@ -82,7 +82,6 @@ const modules: Module[] = [
         text: "When assembling furniture or equipment, I prefer to:",
         options: [
           { value: "visual", label: "Look at diagrams and pictures" },
-          { value: "visual", label: "Follow diagrams and pictures" },
           { value: "auditory", label: "Have someone explain the steps" },
           { value: "kinesthetic", label: "Figure it out by trial and error" },
           { value: "reading", label: "Read the written instructions carefully" },
@@ -630,6 +629,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 60 km/h" },
           { value: "c", label: "C) 65 km/h" },
           { value: "d", label: "D) 70 km/h" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -640,6 +640,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 10" },
           { value: "c", label: "C) 12" },
           { value: "d", label: "D) 15" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -650,6 +651,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 25%" },
           { value: "c", label: "C) 30%" },
           { value: "d", label: "D) 35%" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -660,6 +662,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 5" },
           { value: "c", label: "C) 7" },
           { value: "d", label: "D) 9" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -670,6 +673,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 40 sq cm" },
           { value: "c", label: "C) 96 sq cm" },
           { value: "d", label: "D) 192 sq cm" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
     ],
@@ -861,6 +865,7 @@ const modules: Module[] = [
           { value: "b", label: "B) A = C" },
           { value: "c", label: "C) A > C" },
           { value: "d", label: "D) Cannot be determined" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -871,6 +876,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 32" },
           { value: "c", label: "C) 35" },
           { value: "d", label: "D) 36" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -881,6 +887,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 23" },
           { value: "c", label: "C) 24" },
           { value: "d", label: "D) 25" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -891,6 +898,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 7" },
           { value: "c", label: "C) 8" },
           { value: "d", label: "D) 15" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -901,6 +909,7 @@ const modules: Module[] = [
           { value: "b", label: "B) Some Zips are Zops" },
           { value: "c", label: "C) Some Zaps are Zips" },
           { value: "d", label: "D) None is certain" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
     ],
@@ -974,6 +983,7 @@ const modules: Module[] = [
           { value: "b", label: "B) The same N" },
           { value: "c", label: "C) A rotated Z" },
           { value: "d", label: "D) Cannot be determined" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -984,6 +994,7 @@ const modules: Module[] = [
           { value: "b", label: "B) 8" },
           { value: "c", label: "C) 10" },
           { value: "d", label: "D) 12" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -994,6 +1005,7 @@ const modules: Module[] = [
           { value: "b", label: "B) Triangle" },
           { value: "c", label: "C) Pentagon" },
           { value: "d", label: "D) Smaller square" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -1004,6 +1016,7 @@ const modules: Module[] = [
           { value: "b", label: "B) Sphere" },
           { value: "c", label: "C) Pyramid" },
           { value: "d", label: "D) Cylinder" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
       {
@@ -1014,6 +1027,7 @@ const modules: Module[] = [
           { value: "b", label: "B) Counter-clockwise at the same speed" },
           { value: "c", label: "C) Clockwise at half speed" },
           { value: "d", label: "D) Counter-clockwise at double speed" },
+          { value: "e", label: "E) I don't know" },
         ],
       },
     ],
@@ -1707,6 +1721,7 @@ const modules: Module[] = [
           { value: "b", label: "Fridge" },
           { value: "c", label: "AC" },
           { value: "d", label: "Oven" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1717,6 +1732,7 @@ const modules: Module[] = [
           { value: "b", label: "350" },
           { value: "c", label: "360" },
           { value: "d", label: "370" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1727,6 +1743,7 @@ const modules: Module[] = [
           { value: "b", label: "No correlation" },
           { value: "c", label: "Strong positive" },
           { value: "d", label: "Weak positive" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1737,6 +1754,7 @@ const modules: Module[] = [
           { value: "b", label: "35 is the average age" },
           { value: "c", label: "All ages are 35" },
           { value: "d", label: "Everyone is younger than 35" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1747,6 +1765,7 @@ const modules: Module[] = [
           { value: "b", label: "Showing cause and effect" },
           { value: "c", label: "Tracking changes over time" },
           { value: "d", label: "Comparing different groups" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1757,6 +1776,7 @@ const modules: Module[] = [
           { value: "b", label: "1/4" },
           { value: "c", label: "1/3" },
           { value: "d", label: "1/6" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1767,6 +1787,7 @@ const modules: Module[] = [
           { value: "b", label: "₹50,000" },
           { value: "c", label: "₹55,000" },
           { value: "d", label: "₹60,000" },
+          { value: "e", label: "I don't know" },
         ],
       },
       {
@@ -1777,6 +1798,7 @@ const modules: Module[] = [
           { value: "b", label: "Slow increase" },
           { value: "c", label: "Rapid increase" },
           { value: "d", label: "No change" },
+          { value: "e", label: "I don't know" },
         ],
       },
     ],
@@ -2113,9 +2135,10 @@ export default function ElaborateTestPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const currentModule = modules[currentModuleIndex];
-  const currentQuestion = currentModule.questions[currentQuestionIndex];
+  const currentQuestion = currentModule?.questions[currentQuestionIndex];
   const totalQuestions = modules.reduce((acc, m) => acc + m.questions.length, 0);
 
   const answeredCount = useMemo(() => Object.keys(answers).length, [answers]);
@@ -2128,7 +2151,7 @@ export default function ElaborateTestPage() {
     currentModuleIndex === 0 && currentQuestionIndex === 0;
   const isLastQuestion =
     currentModuleIndex === modules.length - 1 &&
-    currentQuestionIndex === currentModule.questions.length - 1;
+    currentQuestionIndex === currentModule?.questions.length - 1;
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
@@ -2145,6 +2168,14 @@ export default function ElaborateTestPage() {
         ...prev,
         [currentQuestion.id]: value,
       }));
+
+      // Check if this is the 10th question of the 10th module
+      if (currentModuleIndex === 9 && currentQuestionIndex === 9) {
+        setTimeout(() => {
+          setIsCompleted(true);
+        }, 300);
+        return;
+      }
 
       setTimeout(() => {
         if (currentQuestionIndex < currentModule.questions.length - 1) {
@@ -2210,7 +2241,15 @@ export default function ElaborateTestPage() {
     }, 1500);
   }, [answers, router]);
 
-  const currentAnswer = answers[currentQuestion.id];
+  const handleRetake = useCallback(() => {
+    setCurrentModuleIndex(0);
+    setCurrentQuestionIndex(0);
+    setAnswers({});
+    setIsCompleted(false);
+    setIsAnalyzing(false);
+  }, []);
+
+  const currentAnswer = answers[currentQuestion?.id];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -2231,7 +2270,27 @@ export default function ElaborateTestPage() {
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
-        {isAnalyzing ? (
+        {isCompleted ? (
+          <div className="text-center py-20">
+            <div className="mb-6">
+              <div className="w-20 h-20 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="h-10 w-10 text-purple-600" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              Test is completed. Please wait for your results.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-8">
+              You have successfully completed the first 100 questions of the elaborate test.
+            </p>
+            <button
+              onClick={handleRetake}
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors"
+            >
+              Retake Test
+            </button>
+          </div>
+        ) : isAnalyzing ? (
           <div className="text-center py-20">
             <Loader2 className="h-12 w-12 text-purple-600 animate-spin mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
