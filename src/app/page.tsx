@@ -85,7 +85,7 @@ function Navbar() {
                   Sign in
                 </Link>
               ) : (
-                <div className="w-20 h-8" />
+                <div className="px-3 py-1 h-8" aria-label="Loading authentication status" />
               )}
             </div>
           </nav>
