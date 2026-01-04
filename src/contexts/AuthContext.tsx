@@ -8,8 +8,9 @@ import type { User } from "@supabase/supabase-js";
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "phil123";
 const AUTH_STORAGE_KEY = "learnapt-admin-auth";
 
-// Cookie helpers
+// Cookie helpers - only run on client
 function setAuthCookie(value: string) {
+  if (typeof window === 'undefined') return;
   const isProduction = process.env.NODE_ENV === "production";
   const cookieOptions = [
     `learnapt-admin-auth=${value}`,
@@ -21,6 +22,7 @@ function setAuthCookie(value: string) {
 }
 
 function clearAuthCookie() {
+  if (typeof window === 'undefined') return;
   const isProduction = process.env.NODE_ENV === "production";
   const cookieOptions = [
     "learnapt-admin-auth=",
@@ -33,6 +35,7 @@ function clearAuthCookie() {
 }
 
 function getAuthCookie(): boolean {
+  if (typeof window === 'undefined') return false;
   const cookieAuth = document.cookie
     .split("; ")
     .find((row) => row.startsWith("learnapt-admin-auth="));
@@ -111,18 +114,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return () => subscription.unsubscribe();
       } else {
         // Legacy cookie fallback (dev/demo only)
-        try {
-          const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
-          const hasCookie = getAuthCookie();
-          const isAuth = storedAuth === "true" || hasCookie;
-          setIsAuthenticated(isAuth);
-          setUser(null);
-          setUserEmail(null);
-          if (isAuth && storedAuth !== "true") {
-            sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        if (typeof window !== 'undefined') {
+          try {
+            const storedAuth = sessionStorage.getItem(AUTH_STORAGE_KEY);
+            const hasCookie = getAuthCookie();
+            const isAuth = storedAuth === "true" || hasCookie;
+            setIsAuthenticated(isAuth);
+            setUser(null);
+            setUserEmail(null);
+            if (isAuth && storedAuth !== "true") {
+              sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+            }
+          } catch {
+            setIsAuthenticated(false);
           }
-        } catch {
-          setIsAuthenticated(false);
         }
         setIsLoading(false);
       }
@@ -167,7 +172,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Legacy fallback (dev/demo only)
       if (password === ADMIN_PASSWORD) {
         setIsAuthenticated(true);
-        sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+        }
         setAuthCookie("true");
         setUser(null);
         setUserEmail(email ?? null);
@@ -228,7 +235,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else {
       // Legacy
       setIsAuthenticated(false);
-      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
+      }
       clearAuthCookie();
       setUser(null);
       setUserEmail(null);
