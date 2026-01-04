@@ -2152,9 +2152,6 @@ export default function ElaborateTestPage() {
   const isLastQuestion =
     currentModuleIndex === modules.length - 1 &&
     currentQuestionIndex === currentModule?.questions.length - 1;
-  
-  // Check if we're at the end of 10th module (index 9), 10th question (index 9)
-  const isAt10thModuleEnd = currentModuleIndex === 9 && currentQuestionIndex === 9;
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
