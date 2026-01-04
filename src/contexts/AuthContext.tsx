@@ -246,7 +246,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Helper: Admin detection - checks user_metadata.is_admin
-  const isAdmin = user ? (user.user_metadata?.is_admin === true) : false;
+  // For fallback auth (when useSupabase is false), authenticated users are admin
+  const isAdmin = useSupabase 
+    ? (user ? (user.user_metadata?.is_admin === true) : false)
+    : isAuthenticated; // Fallback: all authenticated users are admin
 
   const value: AuthContextType = {
     user,

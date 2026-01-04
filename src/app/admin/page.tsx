@@ -18,6 +18,7 @@ import {
   Zap,
   BookOpen,
   Loader2,
+  Globe,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -47,7 +48,7 @@ export default function AdminPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [assessments, setAssessments] = useState<AssessmentRecord[]>([]);
   const [selectedAssessment, setSelectedAssessment] = useState<AssessmentRecord | null>(null);
-  const [activeTab, setActiveTab] = useState<"dashboard" | "assessments" | "navigation">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "assessments" | "navigation" | "subdomains">("dashboard");
 
   // Load assessments from localStorage on mount
   useEffect(() => {
@@ -440,6 +441,17 @@ export default function AdminPage() {
             <Eye className="h-4 w-4 inline-block mr-2" />
             Site Navigation
           </button>
+          <button
+            onClick={() => setActiveTab("subdomains")}
+            className={`px-4 py-2 font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === "subdomains"
+                ? "border-blue-600 text-blue-600"
+                : "border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            }`}
+          >
+            <Globe className="h-4 w-4 inline-block mr-2" />
+            Subdomains
+          </button>
         </div>
 
         {/* Dashboard Tab */}
@@ -790,6 +802,66 @@ export default function AdminPage() {
                   <BarChart3 className="h-4 w-4" />
                   Results
                 </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Subdomains Tab */}
+        {activeTab === "subdomains" && (
+          <div className="space-y-6">
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                    Central Admin Dashboard
+                  </h2>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Manage and access all iiskills.cloud subdomains from here
+                  </p>
+                </div>
+                <Globe className="h-12 w-12 text-blue-600" />
+              </div>
+
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                  <Globe className="h-5 w-5 text-blue-600" />
+                  About the Central Admin Dashboard
+                </h3>
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  The central admin dashboard allows you to view and manage all subdomains in the iiskills.cloud ecosystem. 
+                  Each subdomain has its own admin area that you can access with your shared Supabase credentials.
+                </p>
+              </div>
+
+              <Link
+                href="/admin/subdomains"
+                className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold text-lg"
+              >
+                <Globe className="h-6 w-6" />
+                Open Central Admin Dashboard
+                <Eye className="h-5 w-5" />
+              </Link>
+
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Features</h4>
+                  <ul className="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• View all subdomains across iiskills.cloud</li>
+                    <li>• Quick access to each subdomain&apos;s admin area</li>
+                    <li>• Filter by category and status</li>
+                    <li>• Shared authentication across all subdomains</li>
+                  </ul>
+                </div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <h4 className="font-semibold text-slate-900 dark:text-white mb-2">Subdomain Categories</h4>
+                  <ul className="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+                    <li>• <span className="font-medium">Learning:</span> Educational platforms</li>
+                    <li>• <span className="font-medium">Admin:</span> Management tools</li>
+                    <li>• <span className="font-medium">Content:</span> Content management</li>
+                    <li>• <span className="font-medium">Analytics:</span> Data and insights</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
