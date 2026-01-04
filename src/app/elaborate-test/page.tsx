@@ -90,18 +90,12 @@ const modules: Module[] = [
       },
       {
         id: "ls7",
-text: "In a training session, I learn best when:",
+        text: "In a training session, I learn best when:",
         options: [
           { value: "visual", label: "The instructor uses visual aids and demonstrations" },
           { value: "auditory", label: "The instructor lectures and explains verbally" },
           { value: "kinesthetic", label: "I can practice hands-on exercises" },
           { value: "reading", label: "I have comprehensive written materials" },
-        text: "I remember people best by:",
-        options: [
-          { value: "visual", label: "Their face and appearance" },
-          { value: "auditory", label: "Their name and voice" },
-          { value: "kinesthetic", label: "What we did together" },
-          { value: "reading", label: "Written notes about them" },
         ],
       },
       {
@@ -112,12 +106,6 @@ text: "In a training session, I learn best when:",
           { value: "auditory", label: "What was said - conversations and sounds" },
           { value: "kinesthetic", label: "What I did - my actions and feelings" },
           { value: "reading", label: "Details I read or wrote down" },
-        text: "When I need to focus, I prefer:",
-        options: [
-          { value: "visual", label: "A clean, organized visual space" },
-          { value: "auditory", label: "Quiet or white noise" },
-          { value: "kinesthetic", label: "To fidget or move while thinking" },
-          { value: "reading", label: "To have reference materials nearby" },
         ],
       },
       {
@@ -128,13 +116,6 @@ text: "In a training session, I learn best when:",
           { value: "auditory", label: "Quiet or appropriate background sounds" },
           { value: "kinesthetic", label: "Freedom to move or fidget" },
           { value: "reading", label: "Written materials to reference" },
-        text: "I enjoy learning activities that involve:",
-        options: [
-          { value: "visual", label: "Watching and observing" },
-          { value: "auditory", label: "Listening and discussing" },
-          { value: "kinesthetic", label: "Hands-on practice" },
-          { value: "reading", label: "Reading and note-taking" },
-
         ],
       },
       {
@@ -145,12 +126,6 @@ text: "In a training session, I learn best when:",
           { value: "auditory", label: "Reviews and recommendations I've heard" },
           { value: "kinesthetic", label: "How it feels and hands-on testing" },
           { value: "reading", label: "Specifications and written reviews" },
-        text: "When explaining something complex, I tend to:",
-        options: [
-          { value: "visual", label: "Draw diagrams or use visuals" },
-          { value: "auditory", label: "Talk through it step by step" },
-          { value: "kinesthetic", label: "Use gestures and demonstrations" },
-          { value: "reading", label: "Write it out in detail" },
         ],
       },
     ],
@@ -3611,13 +3586,6 @@ export default function ElaborateTestPage() {
   const isLastQuestion = currentModuleIndex === modules.length - 1 && 
     currentQuestionIndex === currentModule.questions.length - 1;
 
-  const handleSelectAnswer = useCallback((value: string) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: value,
-    }));
-  }, [currentQuestion.id]);
-
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -3626,6 +3594,23 @@ export default function ElaborateTestPage() {
       setCurrentQuestionIndex(0);
     }
   }, [currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
+
+  const handleSelectAnswer = useCallback((value: string) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [currentQuestion.id]: value,
+    }));
+    
+    // Auto-advance to next question after a brief delay for better UX
+    setTimeout(() => {
+      if (currentQuestionIndex < currentModule.questions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else if (currentModuleIndex < modules.length - 1) {
+        setCurrentModuleIndex((prev) => prev + 1);
+        setCurrentQuestionIndex(0);
+      }
+    }, 300);
+  }, [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
 
   const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {

@@ -190,13 +190,6 @@ export default function BriefTestPage() {
   const isLastQuestion = currentModuleIndex === modules.length - 1 && 
     currentQuestionIndex === currentModule.questions.length - 1;
 
-  const handleSelectAnswer = useCallback((value: string) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: value,
-    }));
-  }, [currentQuestion.id]);
-
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -205,6 +198,23 @@ export default function BriefTestPage() {
       setCurrentQuestionIndex(0);
     }
   }, [currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
+
+  const handleSelectAnswer = useCallback((value: string) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [currentQuestion.id]: value,
+    }));
+    
+    // Auto-advance to next question after a brief delay for better UX
+    setTimeout(() => {
+      if (currentQuestionIndex < currentModule.questions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else if (currentModuleIndex < modules.length - 1) {
+        setCurrentModuleIndex((prev) => prev + 1);
+        setCurrentQuestionIndex(0);
+      }
+    }, 300);
+  }, [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
 
   const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {
