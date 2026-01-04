@@ -1663,7 +1663,16 @@ const modules: Module[] = [
       {
         id: "ci9",
         text: "Innovation for me means:",
-      {
+        options: [
+          { value: "a", label: "Creating something entirely new" },
+          { value: "b", label: "Improving existing solutions" },
+          { value: "c", label: "Finding novel applications for old ideas" },
+          { value: "d", label: "Disrupting the status quo" },
+        ],
+      },
+    ],
+  },
+  {
     id: "data-interpretation",
     title: "Data Interpretation",
     description: "Interpret, analyze, and draw conclusions from data representations and charts.",
@@ -2353,23 +2362,3 @@ export default function ElaborateTestPage() {
     </div>
   );
 }
-          { value: "a", label: "Inventing entirely new solutions" },
-          { value: "b", label: "Improving or combining existing ideas" },
-          { value: "c", label: "Applying ideas in new contexts" },
-          { value: "d", label: "All of the above" },
-        ],
-      },
-      {
-        id: "ci10",
-        text: "Creative risks are:",
-        options: [
-          { value: "a", label: "Essential for growth" },
-          { value: "b", label: "Calculated, not reckless" },
-          { value: "c", label: "Worthwhile if I learn from failure" },
-          { value: "d", label: "Sometimes too risky to take" },
-        ],
-      },
-    ],
-  },
-  //--------- continue to data-interpretation, decision-making, etc. ---------
-      
