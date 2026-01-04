@@ -63,16 +63,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [useSupabase, setUseSupabase] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   const supabase = createClient();
 
-  // Detect Supabase configuration on mount
+  // Detect if we're on the client to prevent hydration mismatches
   useEffect(() => {
-    setUseSupabase(!!(supabase && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY));
-  }, [supabase]);
+    setIsClient(true);
+  }, []);
 
-  // Initialize authentication state on mount
+  // Detect Supabase configuration on mount - only on client
   useEffect(() => {
+    if (isClient) {
+      setUseSupabase(!!(supabase && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY));
+    }
+  }, [supabase, isClient]);
+
+  // Initialize authentication state on mount - only on client
+  useEffect(() => {
+    if (!isClient) return;
+    
     const initAuth = async () => {
       setIsLoading(true);
       if (useSupabase && supabase) {
@@ -133,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     };
     initAuth();
-  }, [useSupabase, supabase]);
+  }, [useSupabase, supabase, isClient]);
 
   // Login function
   const login = async (email: string, password: string) => {
@@ -255,7 +265,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     isAuthenticated,
     isAdmin,
-    isLoading,
+    isLoading: isLoading || !isClient, // Keep loading state until client-side hydration is complete
     login,
     logout,
     register,
