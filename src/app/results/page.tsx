@@ -523,21 +523,39 @@ export default function ResultsPage() {
             Back to Home
           </Link>
           {resultsData.testType === "brief" ? (
-            <Link
-              href="/elaborate-test"
-              className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-            >
-              <BookOpen className="h-5 w-5" />
-              Take Elaborate Test
-            </Link>
+            <>
+              <Link
+                href="/brief-test"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                <RefreshCw className="h-5 w-5" />
+                Retake Brief Test
+              </Link>
+              <Link
+                href="/elaborate-test"
+                className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                <BookOpen className="h-5 w-5" />
+                Take Elaborate Test
+              </Link>
+            </>
           ) : (
-            <Link
-              href="/brief-test"
-              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-            >
-              <Zap className="h-5 w-5" />
-              Take Brief Test
-            </Link>
+            <>
+              <Link
+                href="/elaborate-test"
+                className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                <RefreshCw className="h-5 w-5" />
+                Retake Elaborate Test
+              </Link>
+              <Link
+                href="/brief-test"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                <Zap className="h-5 w-5" />
+                Take Brief Test
+              </Link>
+            </>
           )}
         </div>
       </main>

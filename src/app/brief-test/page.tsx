@@ -57,6 +57,36 @@ const modules: Module[] = [
           { value: "independent", label: "I can explore topics independently" },
         ],
       },
+      {
+        id: "lp4",
+        text: "When studying for an exam, I find it most helpful to:",
+        options: [
+          { value: "visual", label: "Create mind maps or flowcharts" },
+          { value: "auditory", label: "Explain concepts out loud to myself or others" },
+          { value: "kinesthetic", label: "Practice with real examples or simulations" },
+          { value: "reading", label: "Review my written notes multiple times" },
+        ],
+      },
+      {
+        id: "lp5",
+        text: "I understand new concepts better when:",
+        options: [
+          { value: "visual", label: "I can see a visual representation" },
+          { value: "auditory", label: "Someone explains it verbally" },
+          { value: "kinesthetic", label: "I can experiment with it myself" },
+          { value: "reading", label: "I read about it in detail" },
+        ],
+      },
+      {
+        id: "lp6",
+        text: "My ideal study session includes:",
+        options: [
+          { value: "structured", label: "Following a specific plan and timeline" },
+          { value: "flexible", label: "Exploring topics as my interest guides me" },
+          { value: "collaborative", label: "Study groups or discussion with peers" },
+          { value: "independent", label: "Solo deep-dive into the material" },
+        ],
+      },
     ],
   },
   {
@@ -94,6 +124,36 @@ const modules: Module[] = [
           { value: "seek_help", label: "Seek advice or help from others" },
         ],
       },
+      {
+        id: "ps4",
+        text: "When approaching a new challenge, I tend to:",
+        options: [
+          { value: "analytical", label: "Research and gather information first" },
+          { value: "intuitive", label: "Jump in and figure it out as I go" },
+          { value: "creative", label: "Think of unconventional approaches" },
+          { value: "methodical", label: "Apply proven strategies from similar situations" },
+        ],
+      },
+      {
+        id: "ps5",
+        text: "Under pressure, I'm most likely to:",
+        options: [
+          { value: "data", label: "Stick to facts and logical analysis" },
+          { value: "experience", label: "Rely on what has worked before" },
+          { value: "consultation", label: "Seek input from others quickly" },
+          { value: "time", label: "Take a moment to think clearly" },
+        ],
+      },
+      {
+        id: "ps6",
+        text: "I feel most confident in my solutions when:",
+        options: [
+          { value: "analyze", label: "I've thoroughly examined all possibilities" },
+          { value: "pivot", label: "I've kept multiple backup options ready" },
+          { value: "persist", label: "I've refined my approach through iteration" },
+          { value: "seek_help", label: "I've validated my thinking with others" },
+        ],
+      },
     ],
   },
   {
@@ -129,6 +189,36 @@ const modules: Module[] = [
           { value: "external", label: "External rewards and recognition" },
           { value: "competition", label: "Competition and comparison with others" },
           { value: "commitment", label: "Commitment to others or a cause" },
+        ],
+      },
+      {
+        id: "md4",
+        text: "I'm most energized by projects that:",
+        options: [
+          { value: "achievement", label: "Push me beyond my current capabilities" },
+          { value: "recognition", label: "Showcase my skills and talents" },
+          { value: "growth", label: "Teach me something completely new" },
+          { value: "impact", label: "Help solve important problems" },
+        ],
+      },
+      {
+        id: "md5",
+        text: "My ideal work environment provides:",
+        options: [
+          { value: "autonomy", label: "Freedom to make my own decisions" },
+          { value: "variety", label: "Diverse tasks and responsibilities" },
+          { value: "progress", label: "Clear metrics and milestones" },
+          { value: "purpose", label: "A strong sense of mission" },
+        ],
+      },
+      {
+        id: "md6",
+        text: "When facing obstacles, I'm sustained by:",
+        options: [
+          { value: "internal", label: "My own desire to succeed" },
+          { value: "external", label: "Accountability to others" },
+          { value: "competition", label: "The drive to outperform" },
+          { value: "commitment", label: "My promise to see things through" },
         ],
       },
     ],
@@ -171,6 +261,50 @@ const modules: Module[] = [
           { value: "idk", label: "I don't know" },
         ],
       },
+      {
+        id: "nr4",
+        text: "If 5 workers can complete a task in 12 days, how many days will 3 workers take to complete the same task?",
+        options: [
+          { value: "15", label: "15 days" },
+          { value: "18", label: "18 days" },
+          { value: "20", label: "20 days" },
+          { value: "24", label: "24 days" },
+          { value: "idk", label: "I don't know" },
+        ],
+      },
+      {
+        id: "nr5",
+        text: "A train travels 240 km in 4 hours. What is its average speed in km/h?",
+        options: [
+          { value: "50", label: "50 km/h" },
+          { value: "60", label: "60 km/h" },
+          { value: "70", label: "70 km/h" },
+          { value: "80", label: "80 km/h" },
+          { value: "idk", label: "I don't know" },
+        ],
+      },
+      {
+        id: "nr6",
+        text: "If the ratio of boys to girls in a class is 3:2 and there are 15 boys, how many girls are there?",
+        options: [
+          { value: "8", label: "8" },
+          { value: "10", label: "10" },
+          { value: "12", label: "12" },
+          { value: "15", label: "15" },
+          { value: "idk", label: "I don't know" },
+        ],
+      },
+      {
+        id: "nr7",
+        text: "A car's value depreciates by 15% each year. If it's worth ₹4,00,000 today, what will it be worth after 1 year?",
+        options: [
+          { value: "320000", label: "₹3,20,000" },
+          { value: "340000", label: "₹3,40,000" },
+          { value: "360000", label: "₹3,60,000" },
+          { value: "380000", label: "₹3,80,000" },
+          { value: "idk", label: "I don't know" },
+        ],
+      },
     ],
   },
 ];
@@ -181,7 +315,6 @@ export default function BriefTestPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const currentModule = modules[currentModuleIndex];
   const currentQuestion = currentModule?.questions[currentQuestionIndex];
@@ -191,8 +324,6 @@ export default function BriefTestPage() {
   const progress = useMemo(() => (answeredCount / totalQuestions) * 100, [answeredCount, totalQuestions]);
   
   const isFirstQuestion = currentModuleIndex === 0 && currentQuestionIndex === 0;
-  const isLastQuestion = currentModuleIndex === modules.length - 1 && 
-    currentQuestionIndex === currentModule?.questions.length - 1;
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex < currentModule.questions.length - 1) {
@@ -214,8 +345,46 @@ export default function BriefTestPage() {
       currentQuestionIndex === currentModule.questions.length - 1;
     
     if (isLast) {
+      // Auto-submit when last question is answered
       setTimeout(() => {
-        setIsCompleted(true);
+        setIsAnalyzing(true);
+        
+        // Store answers in sessionStorage for the results page
+        const resultsData = {
+          testType: "brief",
+          answers: { ...answers, [currentQuestion.id]: value },
+          modules: modules.map((m) => ({
+            id: m.id,
+            title: m.title,
+            answers: m.questions.map((q) => ({
+              questionId: q.id,
+              question: q.text,
+              answer: q.id === currentQuestion.id ? value : (answers[q.id] || null),
+            })),
+          })),
+          completedAt: new Date().toISOString(),
+        };
+        
+        sessionStorage.setItem("learnapt-results", JSON.stringify(resultsData));
+        
+        // Also save to localStorage for admin history
+        try {
+          const historyStr = localStorage.getItem("learnapt-assessment-history");
+          const history = historyStr ? JSON.parse(historyStr) : [];
+          history.unshift({
+            id: `brief-${Date.now()}`,
+            ...resultsData,
+          });
+          // Keep only last 100 assessments
+          localStorage.setItem("learnapt-assessment-history", JSON.stringify(history.slice(0, 100)));
+        } catch (e) {
+          console.error("Failed to save assessment history:", e);
+        }
+        
+        // Short delay to show analyzing state, then navigate
+        setTimeout(() => {
+          router.push("/results");
+        }, 1500);
       }, 300);
       return;
     }
@@ -229,7 +398,7 @@ export default function BriefTestPage() {
         setCurrentQuestionIndex(0);
       }
     }, 300);
-  }, [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
+  }, [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length, answers, router]);
 
   const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {
@@ -240,55 +409,6 @@ export default function BriefTestPage() {
       setCurrentQuestionIndex(prevModule.questions.length - 1);
     }
   }, [currentQuestionIndex, currentModuleIndex]);
-
-  const handleSubmit = useCallback(() => {
-    setIsAnalyzing(true);
-    
-    // Store answers in sessionStorage for the results page
-    const resultsData = {
-      testType: "brief",
-      answers,
-      modules: modules.map((m) => ({
-        id: m.id,
-        title: m.title,
-        answers: m.questions.map((q) => ({
-          questionId: q.id,
-          question: q.text,
-          answer: answers[q.id] || null,
-        })),
-      })),
-      completedAt: new Date().toISOString(),
-    };
-    
-    sessionStorage.setItem("learnapt-results", JSON.stringify(resultsData));
-    
-    // Also save to localStorage for admin history
-    try {
-      const historyStr = localStorage.getItem("learnapt-assessment-history");
-      const history = historyStr ? JSON.parse(historyStr) : [];
-      history.unshift({
-        id: `brief-${Date.now()}`,
-        ...resultsData,
-      });
-      // Keep only last 100 assessments
-      localStorage.setItem("learnapt-assessment-history", JSON.stringify(history.slice(0, 100)));
-    } catch (e) {
-      console.error("Failed to save assessment history:", e);
-    }
-    
-    // Short delay to show analyzing state, then navigate
-    setTimeout(() => {
-      router.push("/results");
-    }, 1500);
-  }, [answers, router]);
-
-  const handleRetake = useCallback(() => {
-    setCurrentModuleIndex(0);
-    setCurrentQuestionIndex(0);
-    setAnswers({});
-    setIsCompleted(false);
-    setIsAnalyzing(false);
-  }, []);
 
   const currentAnswer = answers[currentQuestion?.id];
 
@@ -308,27 +428,7 @@ export default function BriefTestPage() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
-        {isCompleted ? (
-          <div className="text-center py-20">
-            <div className="mb-6">
-              <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="h-10 w-10 text-blue-600" />
-              </div>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              Test is completed. Please wait for your results.
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-8">
-              You have successfully completed the brief test.
-            </p>
-            <button
-              onClick={handleRetake}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
-            >
-              Retake Test
-            </button>
-          </div>
-        ) : isAnalyzing ? (
+        {isAnalyzing ? (
           <div className="text-center py-20">
             <Loader2 className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
@@ -429,33 +529,18 @@ export default function BriefTestPage() {
                 Previous
               </button>
 
-              {isLastQuestion ? (
-                <button
-                  onClick={handleSubmit}
-                  disabled={answeredCount < totalQuestions}
-                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-semibold transition-colors ${
-                    answeredCount < totalQuestions
-                      ? "bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700 text-white"
-                  }`}
-                >
-                  Submit Test
-                  <Check className="h-5 w-5" />
-                </button>
-              ) : (
-                <button
-                  onClick={handleNext}
-                  disabled={!currentAnswer}
-                  className={`flex items-center gap-2 px-6 py-2 rounded-lg font-semibold transition-colors ${
-                    !currentAnswer
-                      ? "bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700 text-white"
-                  }`}
-                >
-                  Next
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              )}
+              <button
+                onClick={handleNext}
+                disabled={!currentAnswer}
+                className={`flex items-center gap-2 px-6 py-2 rounded-lg font-semibold transition-colors ${
+                  !currentAnswer
+                    ? "bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                Next
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           </>
         )}
