@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Brain, AlertCircle, X, LogIn, LogOut, User } from "lucide-react";
+import { Brain, AlertCircle, X, LogIn, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext"; // <-- Make sure this exists!
 
 function UnauthorizedBanner() {
@@ -39,7 +39,7 @@ function UnauthorizedBanner() {
 }
 
 function Navbar() {
-  const { user, signIn, signOut } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   return (
     <header className="border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
@@ -62,44 +62,28 @@ function Navbar() {
             >
               About
             </Link>
-            {user?.is_admin && (
+            {isAdmin && (
               <Link
                 href="/admin"
                 className="ml-4 px-3 py-1 border rounded text-sm text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-white hover:bg-blue-100 dark:hover:bg-blue-900 border-blue-200 dark:border-blue-800"
-                passHref
               >
                 Admin Panel
               </Link>
             )}
             <div className="ml-6 flex items-center gap-2">
               {user ? (
-                <>
-                  {/* User Dropdown */}
-                  <div className="relative group">
-                    <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900">
-                      <User className="inline h-5 w-5" />
-                      <span className="font-medium">{user.email}</span>
-                    </button>
-                    {/* Sign Out button on hover */}
-                    <div className="hidden absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 shadow-lg rounded-md p-2 group-hover:block z-50">
-                      <button
-                        onClick={signOut}
-                        className="flex items-center gap-2 px-3 py-1 text-red-600 hover:text-red-800"
-                      >
-                        <LogOut className="h-4 w-4" />
-                        Sign out
-                      </button>
-                    </div>
-                  </div>
-                </>
+                <div className="flex items-center gap-2 px-2 py-1">
+                  <User className="inline h-5 w-5" />
+                  <span className="font-medium">{user.email}</span>
+                </div>
               ) : (
-                <button
-                  onClick={signIn}
+                <Link
+                  href="/admin"
                   className="flex items-center gap-2 px-3 py-1 text-blue-600 hover:text-blue-800 border border-blue-200 rounded"
                 >
                   <LogIn className="h-4 w-4" />
                   Sign in
-                </button>
+                </Link>
               )}
             </div>
           </nav>
