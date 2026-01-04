@@ -2135,7 +2135,6 @@ export default function ElaborateTestPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const currentModule = modules[currentModuleIndex];
   const currentQuestion = currentModule?.questions[currentQuestionIndex];
@@ -2161,33 +2160,6 @@ export default function ElaborateTestPage() {
       setCurrentQuestionIndex(0);
     }
   }, [currentQuestionIndex, currentModuleIndex, currentModule.questions.length]);
-
-  const handleSelectAnswer = useCallback(
-    (value: string) => {
-      setAnswers((prev) => ({
-        ...prev,
-        [currentQuestion.id]: value,
-      }));
-
-      // Check if this is the 10th question of the 10th module
-      if (currentModuleIndex === 9 && currentQuestionIndex === 9) {
-        setTimeout(() => {
-          setIsCompleted(true);
-        }, 300);
-        return;
-      }
-
-      setTimeout(() => {
-        if (currentQuestionIndex < currentModule.questions.length - 1) {
-          setCurrentQuestionIndex((prev) => prev + 1);
-        } else if (currentModuleIndex < modules.length - 1) {
-          setCurrentModuleIndex((prev) => prev + 1);
-          setCurrentQuestionIndex(0);
-        }
-      }, 300);
-    },
-    [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length]
-  );
 
   const handlePrevious = useCallback(() => {
     if (currentQuestionIndex > 0) {
@@ -2241,11 +2213,42 @@ export default function ElaborateTestPage() {
     }, 1500);
   }, [answers, router]);
 
+  const handleSelectAnswer = useCallback(
+    (value: string) => {
+      setAnswers((prev) => ({
+        ...prev,
+        [currentQuestion.id]: value,
+      }));
+
+      // Check if this is the last question
+      const isLastQuestionNow =
+        currentModuleIndex === modules.length - 1 &&
+        currentQuestionIndex === currentModule.questions.length - 1;
+
+      if (isLastQuestionNow) {
+        // Auto-submit after answering the last question
+        setTimeout(() => {
+          handleSubmit();
+        }, 300);
+        return;
+      }
+
+      setTimeout(() => {
+        if (currentQuestionIndex < currentModule.questions.length - 1) {
+          setCurrentQuestionIndex((prev) => prev + 1);
+        } else if (currentModuleIndex < modules.length - 1) {
+          setCurrentModuleIndex((prev) => prev + 1);
+          setCurrentQuestionIndex(0);
+        }
+      }, 300);
+    },
+    [currentQuestion.id, currentQuestionIndex, currentModuleIndex, currentModule.questions.length, handleSubmit]
+  );
+
   const handleRetake = useCallback(() => {
     setCurrentModuleIndex(0);
     setCurrentQuestionIndex(0);
     setAnswers({});
-    setIsCompleted(false);
     setIsAnalyzing(false);
   }, []);
 
@@ -2270,34 +2273,14 @@ export default function ElaborateTestPage() {
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
-        {isCompleted ? (
-          <div className="text-center py-20">
-            <div className="mb-6">
-              <div className="w-20 h-20 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="h-10 w-10 text-purple-600" />
-              </div>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              Test is completed. Please wait for your results.
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-8">
-              You have successfully completed the first 100 questions of the elaborate test.
-            </p>
-            <button
-              onClick={handleRetake}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors"
-            >
-              Retake Test
-            </button>
-          </div>
-        ) : isAnalyzing ? (
+        {isAnalyzing ? (
           <div className="text-center py-20">
             <Loader2 className="h-12 w-12 text-purple-600 animate-spin mx-auto mb-6" />
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              Analyzing Your Responses
+              Please wait... Analysing your answers...
             </h2>
             <p className="text-slate-600 dark:text-slate-400">
-              Please wait while we prepare your comprehensive results...
+              We are preparing your comprehensive results...
             </p>
           </div>
         ) : (
