@@ -17,8 +17,8 @@ echo "Restoring branch: $BRANCH_NAME"
 echo "At commit: $COMMIT_SHA"
 
 # Fetch the commit if not already present
-echo "Fetching commit from remote..."
-git fetch origin $COMMIT_SHA
+echo "Fetching from remote..."
+git fetch --all
 
 # Create the branch at the specific commit
 echo "Creating branch locally..."

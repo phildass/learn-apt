@@ -72,7 +72,7 @@ After restoration, verify the branch exists with:
 git ls-remote origin copilot/check-module-question-distribution
 ```
 
-Or check the branches list on GitHub at: `https://github.com/phildass/learn-apt/branches`
+Or check the branches list on GitHub at: `https://github.com/<OWNER>/<REPO>/branches`
 
 ## Additional Notes
 

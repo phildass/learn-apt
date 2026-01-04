@@ -30,8 +30,8 @@ jobs:
       
       - name: Fetch commit
         run: |
-          echo "Fetching commit ${{ inputs.commit_sha }}..."
-          git fetch origin ${{ inputs.commit_sha }}
+          echo "Fetching all refs to ensure commit is available..."
+          git fetch --all
       
       - name: Create and push branch
         run: |
