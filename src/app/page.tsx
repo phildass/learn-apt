@@ -39,7 +39,7 @@ function UnauthorizedBanner() {
 }
 
 function Navbar() {
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, isLoading } = useAuth();
 
   return (
     <header className="border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
@@ -71,12 +71,12 @@ function Navbar() {
               </Link>
             )}
             <div className="ml-6 flex items-center gap-2">
-              {user ? (
+              {!isLoading && user ? (
                 <div className="flex items-center gap-2 px-2 py-1">
                   <User className="inline h-5 w-5" />
                   <span className="font-medium">{user.email}</span>
                 </div>
-              ) : (
+              ) : !isLoading ? (
                 <Link
                   href="/admin"
                   className="flex items-center gap-2 px-3 py-1 text-blue-600 hover:text-blue-800 border border-blue-200 rounded"
@@ -84,6 +84,8 @@ function Navbar() {
                   <LogIn className="h-4 w-4" />
                   Sign in
                 </Link>
+              ) : (
+                <div className="px-3 py-1 h-8" aria-label="Loading authentication status" />
               )}
             </div>
           </nav>
